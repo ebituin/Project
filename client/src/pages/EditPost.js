@@ -4,9 +4,7 @@ import 'react-quill/dist/quill.snow.css';
 import Editor from "../Editor";
 
 
-function updatePost(ev) {
-    ev.preventDefault();
-}
+
 
 
 
@@ -26,7 +24,7 @@ export default function EditPost() {
                 setSummary(postInfo.summary);
             });
         });
-    }, []);
+    }, [id]);
 
     async function updatePost(ev) {
         ev.preventDefault();
