@@ -29,14 +29,13 @@ export default function Header(){
         <header>
         <Link to="/" className="logo">My Blog</Link>
         <nav>
-          {username && (
+          {username ? (
             <>
               <span> Hello, {username}</span>
               <Link to="/create">Create new post</Link>
               <a onClick={logout}>Logout</a>
             </>
-          )}
-          {!userInfo?.username && (
+          ) : (
             <>
               <Link to="/login">Login</Link>
               <Link to="/register">Register</Link>

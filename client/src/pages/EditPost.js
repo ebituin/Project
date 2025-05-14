@@ -1,4 +1,4 @@
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Navigate, useParams } from "react-router-dom";
 import 'react-quill/dist/quill.snow.css';
 import Editor from "../Editor";
@@ -38,7 +38,7 @@ export default function EditPost() {
         }
 
 
-        const response = await fetch('http://localhost:4000/post', {
+        const response = await fetch('http://localhost:4000/post/' + id, {
             method: 'PUT',
             body: data,
             credentials: 'include',

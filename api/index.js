@@ -99,7 +99,7 @@ app.post('/post', uploadMiddleware.single('file'), async (req, res) => {
 
 });
 
-app.put('/post', uploadMiddleware.single('file'), async (req, res) => {
+app.put('/post/:id', uploadMiddleware.single('file'), async (req, res) => {
     let newPath = null;
     if (req.file) {
         const { originalname, path } = req.file;
@@ -118,13 +118,14 @@ app.put('/post', uploadMiddleware.single('file'), async (req, res) => {
         if (!isAuthor) {
             return res.status(400).json('you are not the author');
         }
-        await postDoc.update({
+        await postDoc.updateOne({
             title,
             summary,
             content,
             cover: newPath ? newPath : postDoc.cover,
         });
-        res.json(postDoc);
+        const updatedPost = await Post.findById(req.params.id);
+        res.json(updatedPost);
     });
 });
 
