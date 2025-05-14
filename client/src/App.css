@@ -1,64 +1,97 @@
-body {
-  background-color: #222;
+:root {
+  --bg: #1e1e1e;
+  --card-bg: #2a2a2a;
+  --accent: #4caf50;
+  --text: #e0e0e0;
+  --muted: #888;
+  --border: #444;
+  --hover: #5ecf65;
 }
+
+body {
+  background-color: var(--bg);
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  color: var(--text);
+}
+
 img {
   max-width: 100%;
+  height: auto;
+  border-radius: 6px;
 }
+
 main {
-  padding: 10px;
-  max-width: 800px;
+  padding: 20px;
+  max-width: 850px;
   margin: 0 auto;
 }
+
 header {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
   margin-bottom: 50px;
-  color: aliceblue;
+  color: var(--text);
+  gap: 10px;
+  padding: 10px 0;
 }
+
 header a {
   text-decoration: none;
   color: inherit;
+  transition: color 0.2s;
 }
+
+header a:hover {
+  color: var(--accent);
+}
+
 header a.logo {
   font-weight: bold;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
+  color: var(--accent);
 }
 
 header nav {
   display: flex;
-  gap: 15px;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
 div.post {
+  background-color: var(--card-bg);
+  padding: 20px;
+  border-radius: 10px;
   display: grid;
-  grid-template-columns: .9fr 1.1fr;
+  grid-template-columns: 0.9fr 1.1fr;
   gap: 20px;
   margin-bottom: 30px;
+  transition: transform 0.2s;
 }
 
-.post{
-  color: aliceblue;
+div.post:hover {
+  transform: translateY(-4px);
 }
 
 div.post div.texts h2 {
   margin: 0;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
 }
 
-div.post div.texts a{
+div.post div.texts a {
   text-decoration: none;
-  color: inherit;
+  color: var(--accent);
 }
 
 div.post p.info {
   margin: 6px 0;
-  color: #888;
-  font-size: .7rem;
+  color: var(--muted);
+  font-size: 0.75rem;
   font-weight: bold;
   display: flex;
   gap: 10px;
-
-  
 }
 
 div.post p.info a.author {
@@ -67,84 +100,171 @@ div.post p.info a.author {
 
 div.post p.summary {
   margin: 10px 0;
-  line-height: 1.5rem;
+  line-height: 1.6rem;
+  color: #ccc;
 }
 
-form.login, form.register{
+form.login,
+form.register {
   max-width: 400px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: 10px;
-  box-sizing: border-box;
+  padding: 20px;
+  background-color: var(--card-bg);
+  border-radius: 10px;
 }
 
-input{
-  display: block;
+input {
   width: 100%;
-  padding: 8px 10px;
-  border: 1px solid #555;
-  border-radius: 5px;
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
   background-color: #333;
-  color: #fff;
+  color: var(--text);
   box-sizing: border-box;
 }
 
-button{
-  width: 100%;
-  display: block;
-  background-color: #555;
+button {
+  background-color: var(--accent);
   color: #fff;
   border: 0;
-  padding: 10px 0;
-  border-radius: 5px;
+  padding: 10px;
+  border-radius: 6px;
   cursor: pointer;
   font-size: 1rem;
-  box-sizing: border-box;
+  transition: background 0.2s;
+}
+
+button:hover {
+  background-color: var(--hover);
 }
 
 div.post-page .image {
-  max-height: 200px;
+  max-height: 350px;
   display: flex;
   overflow: hidden;
+  margin-bottom: 20px;
 }
 
 div.post-page .content {
-  max-width: 800px;
-  margin: 20px auto;
-  padding: 20px;
-  background-color: #333;
-  border-radius: 5px;
-  color: aliceblue;
-  font-size: .8 rem;
+  background-color: var(--card-bg);
+  padding: 25px;
+  border-radius: 10px;
+  font-size: 1rem;
+  line-height: 1.7rem;
+  color: var(--text);
 }
 
 div.post-page h1 {
   text-align: center;
   margin: 10px 0 20px;
-  color: aliceblue;
+  color: var(--text);
 }
 
 div.post-page time {
   text-align: center;
   display: block;
-  color: #888;
-  font-size: .7rem;
-} 
+  color: var(--muted);
+  font-size: 0.75rem;
+}
 
 div.post-page .author {
   text-align: center;
   margin-bottom: 20px;
-  margin-top: 20px;
-  color: aliceblue;
-  font-size: .7rem;
+  color: var(--accent);
+  font-size: 0.85rem;
   font-weight: bold;
 }
 
+div.edit-row {
+  text-align: center;
+  margin-bottom: 20px;
+}
 
+a.edit-btn {
+  padding: 8px 15px;
+  border-radius: 6px;
+  background-color: transparent;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+}
 
+a.edit-btn:hover {
+  background-color: var(--accent);
+  color: #fff;
+}
 
+/* Responsive */
+@media (max-width: 768px) {
+  div.post {
+    grid-template-columns: 1fr;
+  }
 
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
+  header nav {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
+  div.post-page .image {
+    max-height: 200px;
+  }
 
+  div.post-page .content {
+    padding: 15px;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  header a.logo {
+    font-size: 1.4rem;
+  }
+
+  div.post-page h1,
+  div.post div.texts h2 {
+    font-size: 1.3rem;
+  }
+
+  div.post-page .content {
+    font-size: 0.9rem;
+  }
+}
+
+a.edit-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 15px;
+  border-radius: 6px;
+  background-color: transparent;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+
+a.edit-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+a.edit-btn:hover {
+  background-color: var(--accent);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+a.edit-btn:hover svg {
+  stroke: #fff;
+}
