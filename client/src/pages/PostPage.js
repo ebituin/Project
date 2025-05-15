@@ -7,20 +7,30 @@ export default function PostPage() {
     const [postInfo, setPostInfo] = useState(null);
     const { userInfo } = useContext(UserContext);
     const { id } = useParams();
+
     useEffect(() => {
-        fetch(`http://localhost:4000/post/${id}`).then(response => {
-            response.json().then(postInfo => {
-                setPostInfo(postInfo);
-            });
-        });
+        fetch(`http://localhost:4000/post/${id}`)
+            .then(res => res.json())
+            .then(data => setPostInfo(data))
+            .catch(err => console.error("Failed to fetch post:", err));
     }, [id]);
-    if (!postInfo) return '';
+
+    if (!postInfo) return <div style={{ textAlign: 'center' }}>Loading...</div>;
+
+    const isAuthor = userInfo?.id === postInfo.author?._id;
+
     return (
         <div className="post-page">
-            <h1>{postInfo.title}</h1>
-            <time>{formatISO9075(new Date(postInfo.createdAt), 'MMM d, yyyy HH:mm')}</time>
-            <div className="author">by @{postInfo.author.username}</div>
-            {userInfo?.id === postInfo.author._id && (
+            <h1>{postInfo.title || 'Untitled Post'}</h1>
+            <div className="meta">
+                {postInfo.createdAt && (
+                    <time>{formatISO9075(new Date(postInfo.createdAt), 'MMM d, yyyy HH:mm')}</time>
+                )}
+                <div className="author">by @{postInfo.author?.username || 'Unknown'}</div>
+            </div>
+
+
+            {isAuthor && (
                 <div className="edit-row">
                     <Link className="edit-btn" to={`/edit/${postInfo._id}`}>
                         <svg
@@ -46,10 +56,21 @@ export default function PostPage() {
                     </Link>
                 </div>
             )}
+
             <div className="image">
-                <img src={`http://localhost:4000/${postInfo.cover}`} alt="" />
+                {postInfo.cover ? (
+                    <img src={`http://localhost:4000/${postInfo.cover}`} alt="Post cover" />
+                ) : (
+                    <div style={{ height: '300px', background: '#444', borderRadius: '10px' }} />
+                )}
             </div>
-            <div className="content" dangerouslySetInnerHTML={{ __html: postInfo.content }} />
+
+            <div
+                className="content"
+                dangerouslySetInnerHTML={{
+                    __html: postInfo.content || '<p>No content available.</p>'
+                }}
+            />
         </div>
-    )
+    );
 }
