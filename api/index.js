@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
-import User from './models/user.js';
+import User from './models/User.js';
 import Post from './models/post.js';
 import jwt from 'jsonwebtoken';
 import cookieParser from 'cookie-parser';
